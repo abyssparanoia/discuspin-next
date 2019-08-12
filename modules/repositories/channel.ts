@@ -15,7 +15,7 @@ export const getChannels = async () => {
 }
 
 // チャンネルを追加する
-export const addChannel = async (name: string, description: string) => {
+export const createChannel = async (name: string, description: string) => {
   const newDoc = db.collection('channels').doc()
   const data: Channel = {
     id: newDoc.id,
