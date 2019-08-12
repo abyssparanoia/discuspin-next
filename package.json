@@ -1,0 +1,88 @@
+{
+  "name": "nextjs-boilerplate",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon server/main.ts",
+    "start:prd": "NODE_ENV=production node ./dist/server/main.js",
+    "build": "next build && tsc -p ./server && cp firebaseAdminKey.json ./dist && cp firebaseClientKey.json ./dist",
+    "start": "next start",
+    "lint": "eslint --fix -c ./.eslintrc.js './**/*.{ts,tsx}'",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.1.3",
+    "@material-ui/icons": "^4.2.1",
+    "axios": "^0.19.0",
+    "body-parser": "1.19.0",
+    "core-js": "3.1.4",
+    "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
+    "express": "4.17.1",
+    "express-session": "1.16.2",
+    "firebase": "6.2.4",
+    "firebase-admin": "8.2.0",
+    "next": "9.0.1",
+    "path": "^0.12.7",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "session-file-store": "1.3.0",
+    "styled-components": "^4.3.2",
+    "ts-node": "8.3.0",
+    "typescript": "3.5.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "1.17.0",
+    "@types/express-session": "1.15.13",
+    "@types/node": "12.0.10",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "@types/session-file-store": "1.2.0",
+    "@types/styled-components": "^4.1.16",
+    "@zeit/next-typescript": "^1.1.1",
+    "@babel/core": "^7.5.0",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-console": "^1.1.1",
+    "@storybook/addon-info": "^5.1.9",
+    "@storybook/addon-knobs": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addon-storysource": "^5.1.9",
+    "@storybook/addon-viewport": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/cli": "^5.1.9",
+    "@storybook/react": "^5.1.9",
+    "@types/axios": "^0.14.0",
+    "@types/storybook__addon-actions": "^3.4.3",
+    "@types/storybook__addon-info": "^4.1.2",
+    "@types/storybook__addon-knobs": "^5.0.2",
+    "@types/storybook__react": "^4.0.2",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "husky": "^2.7.0",
+    "lint-staged": "^8.2.1",
+    "nodemon": "1.19.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.18.2",
+    "react-docgen-typescript-loader": "^3.1.0",
+    "storybook-addon-material-ui": "^0.9.0-alpha.20"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{.ts,tsx}": [
+      "eslint --fix -c ./.eslintrc.js './**/*.{ts,tsx}'",
+      "git add"
+    ]
+  }
+}
