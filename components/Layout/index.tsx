@@ -36,10 +36,19 @@ export const Layout: React.FunctionComponent<Props> = ({ children, title = 'This
       <MenuAppBar userID={userID} handleSignOut={handleSignOut} />
       {isLoading && <div>{'loadign....'}</div>}
       {error && <div>{error.message}</div>}
-      <Grid container className={classes.root}>
-        <SideBar />
-        {children}
-      </Grid>
+      {userID && (
+        <Grid container className={classes.root}>
+          <SideBar />
+          {children}
+        </Grid>
+      )}
+
+      {!userID && (
+        <Grid container className={classes.root}>
+          {children}
+        </Grid>
+      )}
+
       <footer>
         <hr />
         <span> {"I'm here to stay (Footer)"}</span>
