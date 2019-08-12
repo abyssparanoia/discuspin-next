@@ -9,15 +9,15 @@ export const useWatchChannels = () => {
   const [error, setError] = useState<Error | undefined>(undefined)
 
   useEffectAsync(async () => {
-    const unsubscribe = db.collection('channels').onSnapshot(async () => {
-      await getChannels()
+    const unsubscribe = db.collection('channels').onSnapshot(() => {
+      getChannels()
         .then(channels => setChannels(channels))
         .catch(err => {
           setError(new Error(`ユーザー一覧の取得に失敗しました [${err}]`))
         })
     })
 
-    return () => unsubscribe()
+    return unsubscribe
   })
 
   return { channels, error }
