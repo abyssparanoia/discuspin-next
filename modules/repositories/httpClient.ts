@@ -1,4 +1,4 @@
-import { default as axios, AxiosResponse } from 'axios'
+import { default as axios, AxiosResponse, AxiosError } from 'axios'
 
 export class AxiosClient {
   public basedUrl: string
@@ -38,5 +38,30 @@ export class AxiosClient {
   public async delete<T = any>(id: string): Promise<AxiosResponse<T>> {
     const url = `${this.basedUrl}/${id}`
     return this.axiosInstance.delete(url)
+  }
+}
+
+interface ErrorResponse {
+  message: string
+  type: string
+}
+
+export class HttpError extends Error {
+  private readonly axiosError: AxiosError
+  public readonly type?: string
+
+  constructor(error: AxiosError) {
+    super(error.message)
+    this.name = new.target.name
+    this.axiosError = error
+    Object.setPrototypeOf(this, new.target.prototype)
+
+    if (this.axiosError.response) {
+      const { message, type } = this.axiosError.response.data.error as ErrorResponse
+      this.message = message
+      this.type = type
+    } else {
+      this.message = 'アプリケーションエラーが発生しました'
+    }
   }
 }
