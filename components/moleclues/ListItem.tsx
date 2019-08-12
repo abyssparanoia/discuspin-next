@@ -1,5 +1,7 @@
 import React from 'react'
 import { createStyles, Theme, makeStyles } from '@material-ui/core'
+import Link from 'next/link'
+import { Channel } from 'modules/entities'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,17 +31,16 @@ const useStyles = makeStyles((theme: Theme) =>
 type ItemType = {
   title: string
   isActive: boolean
-  item?: Object
+  item: Channel
 }
 
 const ListItem: React.StatelessComponent<ItemType> = props => {
   const classes = useStyles()
   return (
-    <div
-      className={props.isActive ? classes.channelActive : classes.channel}
-      //   onClick={(e: React.MouseEvent) => (props.onClick ? props.onClick(e, item!) : null)}
-    >
-      {props.title}
+    <div className={props.isActive ? classes.channelActive : classes.channel}>
+      <Link href={{ pathname: `/channels/${props.item.id}` }}>
+        <a>{props.title}</a>
+      </Link>
     </div>
   )
 }

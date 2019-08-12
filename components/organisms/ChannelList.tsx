@@ -12,6 +12,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 // import DialogTitle from '@material-ui/core/DialogTitle'
 import ListItem from '../moleclues/ListItem'
 import { Channel } from 'modules/entities'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +56,9 @@ interface Props {
 
 export const ChannelList = ({ channels }: Props) => {
   const classes = useStyles()
+  const router = useRouter()
+
+  const channelID = (router.query.channelID as unknown) as string | undefined
 
   return (
     <div className={classes.root}>
@@ -80,8 +84,7 @@ export const ChannelList = ({ channels }: Props) => {
             item={item}
             key={item.id}
             title={item.title}
-            // isActive={item.id === channelID}
-            isActive={false}
+            isActive={item.id === channelID}
             // onClick={this.handleSelectChannel}
           />
         )
