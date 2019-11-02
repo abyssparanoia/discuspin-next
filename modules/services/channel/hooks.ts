@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { db } from '../../firebase/client'
+import { db } from '../../../firebase/client'
 // import { useEffectAsync } from './util'
 import * as entities from 'modules/entities'
 import { createChannel } from 'modules/repositories'
