@@ -13,7 +13,6 @@ export const authenticate = async (
   let token: string | undefined = undefined
   // サーバー上での処理
   if (req && req.session) {
-    console.log('サーバー')
     const user = req.session.firebaseUser
     token = req.session.firebaseToken
     // userがnullの場合は未認証なので、sign_inにredirectする
@@ -26,7 +25,6 @@ export const authenticate = async (
     userID = user ? user.uid : undefined
     // ブラウザ上での処理
   } else {
-    console.log('ブラウザ')
     const user = auth.currentUser
     if (user) {
       userID = user.uid
