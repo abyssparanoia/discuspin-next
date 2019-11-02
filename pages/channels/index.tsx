@@ -1,5 +1,4 @@
 import React from 'react'
-// import { AuthContext } from "../contexts";
 import { authenticate } from 'modules/services'
 import { ExNextPageContext } from 'next'
 import Link from 'next/link'
@@ -12,7 +11,6 @@ type InitialProps = {
 type Props = {} & InitialProps
 
 const Channels = (_: Props) => {
-  // const authInfo = useContext(AuthContext);
   return (
     <>
       <div>ログイン済みユーザーのみが見れる</div>

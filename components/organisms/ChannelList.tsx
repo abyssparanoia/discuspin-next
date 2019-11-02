@@ -10,7 +10,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 // import DialogContent from '@material-ui/core/DialogContent'
 // import DialogContentText from '@material-ui/core/DialogContentText'
 // import DialogTitle from '@material-ui/core/DialogTitle'
-import ListItem from '../moleclues/ListItem'
+import Link from 'next/link'
 import { Channel } from 'modules/entities'
 import { useRouter } from 'next/router'
 
@@ -46,6 +46,26 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: '12px',
       paddingBottom: '12px',
       fontSize: '12px'
+    },
+    channel: {
+      fontSize: '13px',
+      padding: '24px 12px',
+      cursor: 'pointer',
+      transition: '128ms',
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.primary,
+      '&:hover': {
+        background: '#424242'
+      }
+    },
+    channelActive: {
+      fontSize: '13px',
+      padding: '24px 12px',
+      cursor: 'pointer',
+      transition: '128ms',
+      backgroundColor: theme.palette.primary.dark,
+      boxShadow: theme.shadows[4],
+      color: theme.palette.text.primary
     }
   })
 )
@@ -80,15 +100,17 @@ export const ChannelList = ({ channels }: Props) => {
             </Tooltip> */}
       </div>
 
+      <Link href="/channels/D08XtXEGEflili7X7NOC">
+        <a>テスト</a>
+      </Link>
+
       {channels.map(item => {
         return (
-          <ListItem
-            item={item}
-            key={item.id}
-            title={item.title}
-            isActive={item.id === channelID}
-            // onClick={this.handleSelectChannel}
-          />
+          <div key={item.id} className={item.id === channelID ? classes.channelActive : classes.channel}>
+            <Link href={`/channels/[channelID]`} as={`/channels/${item.id}`}>
+              <a>{item.title}</a>
+            </Link>
+          </div>
         )
       })}
     </div>
