@@ -102,10 +102,6 @@ export const ChannelList = ({ channels }: Props) => {
         </Tooltip>
       </div>
 
-      <Link href="/channels/D08XtXEGEflili7X7NOC">
-        <a>テスト</a>
-      </Link>
-
       {channels.map(item => {
         return (
           <div key={item.id} className={item.id === channelID ? classes.channelActive : classes.channel}>
