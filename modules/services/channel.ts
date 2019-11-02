@@ -3,8 +3,9 @@ import { db } from '../../firebase/client'
 import { useEffectAsync } from './util'
 import { Channel } from 'modules/entities'
 import { getChannels, createChannel } from 'modules/repositories'
+import undefined from 'firebase/empty-import'
 
-export const useWatchChannels = () => {
+export const useWatchChannelList = () => {
   const [channels, setChannels] = useState<Channel[]>([])
   const [error, setError] = useState<Error | undefined>(undefined)
 
