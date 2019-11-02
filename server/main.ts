@@ -2,20 +2,19 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 import * as bodyParser from 'body-parser'
 import session, { SessionOptions } from 'express-session'
-import sessionFileStore from 'session-file-store'
 import firebaseAdmin from '../firebase/admin'
-import { auth } from 'firebase-admin'
+import { auth, firestore } from 'firebase-admin'
+import { FireSessionStore } from './FireSessionStore'
 
 const dev = process.env.NODE_ENV !== 'production'
 const PORT = process.env.PORT || 3000
 
 const app = next({ dir: '.', dev })
 const handle = app.getRequestHandler()
-const FileStore = sessionFileStore(session)
 const sessionOptions: SessionOptions = {
   secret: 'secretString',
   saveUninitialized: true,
-  store: new FileStore({ path: '/tmp/sessions', secret: 'secretString' }),
+  store: new FireSessionStore({ db: firestore() }),
   resave: false,
   rolling: true,
   cookie: { maxAge: 604800000 } // week
