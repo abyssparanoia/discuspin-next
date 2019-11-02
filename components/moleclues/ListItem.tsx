@@ -1,7 +1,8 @@
 import React from 'react'
-import { createStyles, Theme, makeStyles } from '@material-ui/core'
+import { createStyles, Theme, makeStyles, Button } from '@material-ui/core'
 import Link from 'next/link'
 import { Channel } from 'modules/entities'
+import Router from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +42,7 @@ const ListItem: React.StatelessComponent<ItemType> = props => {
       <Link href={{ pathname: `/channels/${props.item.id}` }}>
         <a>{props.title}</a>
       </Link>
+      <Button onClick={() => Router.push('/channels/${props.item.id}')}>aaaa</Button>
     </div>
   )
 }

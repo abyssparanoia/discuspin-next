@@ -2,7 +2,6 @@ import React from 'react'
 import { ExNextPageContext } from 'next'
 import { authenticate } from 'modules/services'
 import Link from 'next/link'
-import { Layout } from 'components/Layout'
 
 type InitialProps = {
   token?: string
@@ -15,7 +14,7 @@ const Index = ({ userID }: Props) => {
   // const authInfo = useContext(AuthContext)
 
   return (
-    <Layout userID={userID}>
+    <>
       {userID && (
         <>
           <div>認証時はこれが表示される</div>
@@ -31,7 +30,7 @@ const Index = ({ userID }: Props) => {
       <Link href={{ pathname: '/login_required' }}>
         <a>ログイン必要ページへ</a>
       </Link>
-    </Layout>
+    </>
   )
 }
 

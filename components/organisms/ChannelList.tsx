@@ -60,6 +60,8 @@ export const ChannelList = ({ channels }: Props) => {
 
   const channelID = (router.query.channelID as unknown) as string | undefined
 
+  console.log(channels.length)
+
   return (
     <div className={classes.root}>
       <div

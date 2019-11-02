@@ -47,6 +47,9 @@ export const MenuAppBar = ({ userID, handleSignOut }: Props) => {
           <Typography variant="h6" className={classes.title}>
             <Link href="/">NextJS Firebase Boilerplate</Link>{' '}
           </Typography>
+          <Typography variant="h6" className={classes.title}>
+            <Link href="/channels">チャンネル一覧</Link>{' '}
+          </Typography>
           {userID && (
             <div>
               <IconButton

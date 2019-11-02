@@ -12,6 +12,8 @@ export const useWatchChannelList = () => {
 
   const channels = value ? value.docs.map(qsnp => entities.buildChannel(qsnp.id, qsnp.data())) : []
 
+  console.log(loading)
+
   return { channels, loading, error }
 }
 

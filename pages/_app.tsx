@@ -4,6 +4,7 @@ import { firebase } from '../firebase/client'
 import { AuthContext, AuthInfo } from '../contexts'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { Layout } from 'components/Layout'
 import Head from 'next/head'
 import theme from '../thema'
 
@@ -59,7 +60,9 @@ export default class extends App<AppInitialProps, State> {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider value={{ userID: this.state.userID, token: this.state.token }}>
             <CssBaseline />
-            <Component {...pageProps} />
+            <Layout userID={pageProps.userID}>
+              <Component {...pageProps} />
+            </Layout>
           </AuthContext.Provider>
         </ThemeProvider>
       </Container>

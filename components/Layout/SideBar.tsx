@@ -6,7 +6,5 @@ import ChannelList from '../organisms/ChannelList'
 export const SideBar = () => {
   const watchChannelsRef = useWatchChannelList()
 
-  console.log('変更')
-
   return <ChannelList channels={watchChannelsRef.channels} />
 }

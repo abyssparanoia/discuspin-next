@@ -3,7 +3,6 @@ import { ExNextPageContext } from 'next'
 import Router from 'next/router'
 import { useSignInWithGoogle } from 'modules/services'
 import { auth } from '../firebase/client'
-import { Layout } from 'components/Layout'
 
 type Props = {}
 
@@ -11,10 +10,10 @@ const SignIn = (_: Props) => {
   const { handleSignIn } = useSignInWithGoogle()
 
   return (
-    <Layout>
+    <>
       <div>ログインページ</div>
       <button onClick={handleSignIn}>SignIn</button>
-    </Layout>
+    </>
   )
 }
 
