@@ -7,7 +7,7 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { CreateChannelForm } from './interface'
 
 export const useWatchChannelList = () => {
-  const [value, loading, error] = useCollection(db.collection('channels'), {
+  const [value, loading, error] = useCollection(db.collection('channels').orderBy('updatedAt', 'desc'), {
     snapshotListenOptions: { includeMetadataChanges: true }
   })
 

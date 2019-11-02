@@ -53,7 +53,7 @@ export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
           errors.name = requiredMsg
         }
 
-        if (values.description) {
+        if (!values.description) {
           errors.description = requiredMsg
         }
         return errors
@@ -63,15 +63,16 @@ export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
         onClose()
         setSubmitting(false)
       }}
-      render={({ submitForm, isSubmitting }) => (
+    >
+      {({ submitForm, isSubmitting }) => (
         <Form>
-          <Field name="title" type="input" label="title" className={classes.formFields} component={TextField} />
+          <Field name="name" type="text" label="title" className={classes.formFields} component={TextField} />
           <Field
-            name="descriotion"
-            type="input"
+            name="description"
+            type="text"
             label="Description"
             className={classes.formTextArea}
-            component={'textarea'}
+            component={TextField}
           />
           <Button
             variant="contained"
@@ -84,6 +85,6 @@ export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
           </Button>
         </Form>
       )}
-    />
+    </Formik>
   )
 }
