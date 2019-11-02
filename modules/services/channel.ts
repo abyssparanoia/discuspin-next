@@ -1,27 +1,18 @@
 import { useState } from 'react'
 import { db } from '../../firebase/client'
-import { useEffectAsync } from './util'
-import { Channel } from 'modules/entities'
-import { getChannels, createChannel } from 'modules/repositories'
-import undefined from 'firebase/empty-import'
+// import { useEffectAsync } from './util'
+import * as entities from 'modules/entities'
+import { createChannel } from 'modules/repositories'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 export const useWatchChannelList = () => {
-  const [channels, setChannels] = useState<Channel[]>([])
-  const [error, setError] = useState<Error | undefined>(undefined)
-
-  useEffectAsync(async () => {
-    const unsubscribe = db.collection('channels').onSnapshot(() => {
-      getChannels()
-        .then(channels => setChannels(channels))
-        .catch(err => {
-          setError(new Error(`ユーザー一覧の取得に失敗しました [${err}]`))
-        })
-    })
-
-    return unsubscribe
+  const [value, loading, error] = useCollection(db.collection('channels'), {
+    snapshotListenOptions: { includeMetadataChanges: true }
   })
 
-  return { channels, error }
+  const channels = value ? value.docs.map(qsnp => entities.buildChannel(qsnp.id, qsnp.data())) : []
+
+  return { channels, loading, error }
 }
 
 interface CreateChannelForm {
