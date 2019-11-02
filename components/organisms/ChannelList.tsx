@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // material ui
-// import { Tooltip, Fab } from '@material-ui/core'
+import { Tooltip, Fab, Button } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-// import AddIcon from '@material-ui/icons/Add'
+import AddIcon from '@material-ui/icons/Add'
 // import Button from '@material-ui/core/Button'
 // import TextField from '@material-ui/core/TextField'
-// import Dialog from '@material-ui/core/Dialog'
-// import DialogContent from '@material-ui/core/DialogContent'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
 // import DialogContentText from '@material-ui/core/DialogContentText'
 // import DialogTitle from '@material-ui/core/DialogTitle'
 import Link from 'next/link'
 import { Channel } from 'modules/entities'
 import { useRouter } from 'next/router'
+import { CreateChannelForm } from 'components/moleclues/ChannelForm'
+import { useCreateChannel } from 'modules/services'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,6 +77,8 @@ interface Props {
 }
 
 export const ChannelList = ({ channels }: Props) => {
+  const [isDialog, setIsDialog] = useState<boolean>(false)
+  const { handleSubmit } = useCreateChannel()
   const classes = useStyles()
   const router = useRouter()
 
@@ -91,11 +95,11 @@ export const ChannelList = ({ channels }: Props) => {
         }}
       >
         <div className={classes.title}>チャンネル一覧</div>
-        {/* <Tooltip title="Add" aria-label="Add">
-              <Fab color="secondary" className={classes.addBtn} size="small" onClick={this.handleClickOpen}>
-                <AddIcon />
-              </Fab>
-            </Tooltip> */}
+        <Tooltip title="Add" aria-label="Add">
+          <Fab color="secondary" className={classes.addBtn} size="small" onClick={() => setIsDialog(true)}>
+            <AddIcon />
+          </Fab>
+        </Tooltip>
       </div>
 
       <Link href="/channels/D08XtXEGEflili7X7NOC">
@@ -111,6 +115,14 @@ export const ChannelList = ({ channels }: Props) => {
           </div>
         )
       })}
+      <Dialog open={isDialog} aria-labelledby="form-dialog-title">
+        <DialogContent>
+          <CreateChannelForm onSubmit={handleSubmit} onClose={() => setIsDialog(false)} />
+        </DialogContent>
+        <Button onClick={() => setIsDialog(false)} color="primary">
+          キャンセル
+        </Button>
+      </Dialog>
     </div>
   )
 }

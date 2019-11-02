@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       textAlign: 'left'
     },
+    formTextArea: {
+      marginTop: theme.spacing(2),
+      width: '100%',
+      height: '200px',
+      textAlign: 'left'
+    },
     formLabel: {
       fontSize: '1em',
       textAlign: 'left'
@@ -25,9 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   onSubmit: (values: ICreateChannelForm) => void
+  onClose: () => void
 }
 
-export const CreateChannelForm = ({ onSubmit }: Props) => {
+export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
   const classes = useStyles()
   let values: ICreateChannelForm = {
     name: '',
@@ -53,23 +60,18 @@ export const CreateChannelForm = ({ onSubmit }: Props) => {
       }}
       onSubmit={(values: ICreateChannelForm, { setSubmitting }) => {
         onSubmit(values)
+        onClose()
         setSubmitting(false)
       }}
       render={({ submitForm, isSubmitting }) => (
         <Form>
+          <Field name="title" type="input" label="title" className={classes.formFields} component={TextField} />
           <Field
-            name="email"
-            type="email"
-            label="メールアドレス or ユーザーネーム"
-            className={classes.formFields}
-            component={TextField}
-          />
-          <Field
-            name="password"
-            type="password"
-            label="パスワード"
-            className={classes.formFields}
-            component={TextField}
+            name="descriotion"
+            type="input"
+            label="Description"
+            className={classes.formTextArea}
+            component={'textarea'}
           />
           <Button
             variant="contained"

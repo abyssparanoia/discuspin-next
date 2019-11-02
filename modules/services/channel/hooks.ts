@@ -4,6 +4,7 @@ import { db } from '../../../firebase/client'
 import * as entities from 'modules/entities'
 import { createChannel } from 'modules/repositories'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import { CreateChannelForm } from './interface'
 
 export const useWatchChannelList = () => {
   const [value, loading, error] = useCollection(db.collection('channels'), {
@@ -15,22 +16,11 @@ export const useWatchChannelList = () => {
   return { channels, loading, error }
 }
 
-interface CreateChannelForm {
-  name: string
-  description: string
-}
-
 export const useCreateChannel = () => {
-  const [values, setValues] = useState<CreateChannelForm>({ name: '', description: '' })
   const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [error, setError] = useState<Error | undefined>(undefined)
 
-  const handleChange = (target: keyof CreateChannelForm) => (e: any) => {
-    values[target] = e.target.value
-    setValues(values)
-  }
-
-  const handleSubmit = () => {
+  const handleSubmit = (values: CreateChannelForm) => {
     setIsLoading(true)
     createChannel(values.name, values.description)
       .then(() => setIsLoading(false))
@@ -40,5 +30,5 @@ export const useCreateChannel = () => {
       })
   }
 
-  return { isLoading, error, handleChange, handleSubmit }
+  return { isLoading, error, handleSubmit }
 }
