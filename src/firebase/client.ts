@@ -3,7 +3,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(require('../firebaseClientKey.json'))
+  firebase.initializeApp(require('../../firebaseClientKey.json'))
 }
 
 const auth = firebase.auth()

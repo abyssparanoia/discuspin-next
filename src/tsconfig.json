@@ -7,6 +7,6 @@
     "module": "commonjs",
     "noEmit": false
   },
-  "include": [".", "../run.ts", "../index.ts"],
-  "exclude": ["pages", "components", "contexts", "firebase", "modules"]
+  "include": ["."],
+  "exclude": ["./pages", "./components", "./contexts", "./firebase/client.ts", "./modules"]
 }
