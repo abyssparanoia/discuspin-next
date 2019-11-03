@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import Link from 'next/link'
 import { Channel } from 'modules/entities'
 import { useRouter } from 'next/router'
-import { CreateChannelForm } from 'components/moleclues/ChannelForm'
+import { CreateChannelForm } from 'src/components/moleclues/ChannelForm'
 import { useCreateChannel } from 'modules/services'
 
 const useStyles = makeStyles((theme: Theme) =>

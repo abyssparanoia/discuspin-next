@@ -1,12 +1,12 @@
 import * as React from 'react'
 import App, { Container, AppInitialProps, AppContext } from 'next/app'
-import { firebase } from '../firebase/client'
+import { firebase } from '../../firebase/client'
 import { AuthContext, AuthInfo } from '../contexts'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { Layout } from 'components/Layout'
+import { Layout } from 'src/components/Layout'
 import Head from 'next/head'
-import theme from '../thema'
+import theme from '../../thema'
 
 interface State extends AuthInfo {}
 
