@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Layout } from 'src/components/Layout'
 import Head from 'next/head'
-import theme from '../../thema'
+import theme from '../thema'
 
 interface State extends AuthInfo {}
 
