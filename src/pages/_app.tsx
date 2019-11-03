@@ -1,6 +1,6 @@
 import * as React from 'react'
 import App, { Container, AppInitialProps, AppContext } from 'next/app'
-import { firebase } from '../../firebase/client'
+import { firebase } from '../firebase/client'
 import { AuthContext, AuthInfo } from '../contexts'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'

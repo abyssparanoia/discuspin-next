@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin'
 
 export default admin.initializeApp({
-  credential: admin.credential.cert(require('./firebaseAdminKey.json'))
+  credential: admin.credential.cert(require(process.env.GOOGLE_APPLICATION_CREDENTIALS))
 })
 
 declare global {
