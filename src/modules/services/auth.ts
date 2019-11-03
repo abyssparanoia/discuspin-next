@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ExNextPageContext } from 'next'
 import { auth } from '../../firebase/client'
 import Router from 'next/router'
-import * as repositoris from 'modules/repositories'
+import * as repositoris from 'src/modules/repositories'
 
 export const authenticate = async (
   req: ExNextPageContext['req'],

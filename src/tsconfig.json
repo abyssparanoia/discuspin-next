@@ -4,9 +4,17 @@
     "target": "es2017",
     "outDir": "../dist",
     "declaration": false,
-    "module": "commonjs",
+    "module": "esnext",
     "noEmit": false
   },
-  "include": ["."],
-  "exclude": ["./pages", "./components", "./contexts", "./firebase/client.ts", "./modules"]
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "./pages",
+    "./components",
+    "./contexts",
+    "./firebase/client.ts",
+    "./modules"
+  ]
 }

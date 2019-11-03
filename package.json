@@ -6,7 +6,7 @@
     "start:dev": "nodemon server/run.ts",
     "start:prd": "NODE_ENV=production node ./dist/server/run.js",
     "build": "yarn build:next && yarn build:server",
-    "build:next": "next build",
+    "build:next": "next build ./src",
     "build:server": "tsc -p ./src && cp ./firebaseAdminKey.json ./dist/server",
     "lint": "eslint --fix -c ./.eslintrc.js './**/*.{ts,tsx}'",
     "storybook": "start-storybook"

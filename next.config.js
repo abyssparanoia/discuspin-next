@@ -16,10 +16,11 @@ module.exports = {
       })
     ]
 
-    config.resolve.alias['modules'] = path.join(__dirname, 'src/modules')
-    config.resolve.alias['pages'] = path.join(__dirname, 'src/pages')
-    config.resolve.alias['contexts'] = path.join(__dirname, 'src/contexts')
-    config.resolve.alias['components'] = path.join(__dirname, 'src/components')
+    config.resolve.alias['src'] = path.join(__dirname, 'src')
+    config.resolve.alias['modules'] = path.join(__dirname, '/src/modules')
+    config.resolve.alias['pages'] = path.join(__dirname, '/src/pages')
+    config.resolve.alias['contexts'] = path.join(__dirname, '/src/contexts')
+    config.resolve.alias['components'] = path.join(__dirname, '/src/components')
 
     
 

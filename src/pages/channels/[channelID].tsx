@@ -1,5 +1,5 @@
 import React from 'react'
-import { authenticate } from 'modules/services'
+import { authenticate } from 'src/modules/services'
 import { ExNextPageContext } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

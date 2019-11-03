@@ -1,6 +1,6 @@
 import React from 'react'
 import { ExNextPageContext } from 'next'
-import { authenticate } from 'modules/services'
+import { authenticate } from '../modules/services'
 import Link from 'next/link'
 
 type InitialProps = {
