@@ -26,5 +26,5 @@ module.exports = {
 
     return config
   },
-  distDir:'dist/server/.next'
+  distDir:'dist/src/.next'
 }

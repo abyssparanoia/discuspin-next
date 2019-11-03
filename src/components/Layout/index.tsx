@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Head from 'next/head'
 import { MenuAppBar } from './AppBar'
-import { useSignOut } from 'modules/services'
+import { useSignOut } from 'src/modules/services'
 import { SideBar } from './SideBar'
 import { createStyles, Theme, makeStyles, Grid } from '@material-ui/core'
 
