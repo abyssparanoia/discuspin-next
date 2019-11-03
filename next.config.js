@@ -21,6 +21,9 @@ module.exports = {
     config.resolve.alias['contexts'] = path.join(__dirname, 'contexts')
     config.resolve.alias['components'] = path.join(__dirname, 'components')
 
+    
+
     return config
-  }
+  },
+  distDir:'dist/server/.next'
 }

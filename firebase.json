@@ -1,0 +1,15 @@
+{
+  "functions": {
+    "source": "dist/server",
+    "predeploy": ["yarn build", "cp package.json ./dist/server"]
+  },
+  "hosting": {
+    "public": "public",
+    "rewrites": [
+      {
+        "source": "**/**",
+        "function": "nextApp"
+      }
+    ]
+  }
+}

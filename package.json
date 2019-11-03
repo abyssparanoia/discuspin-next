@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon server/main.ts",
-    "start:prd": "NODE_ENV=production node ./dist/server/main.js",
-    "build": "next build && tsc -p ./server",
-    "start": "next start",
+    "start:dev": "nodemon server/run.ts",
+    "start:prd": "NODE_ENV=production node ./dist/server/run.js",
+    "build": "yarn build:next && yarn build:server",
+    "build:next": "next build",
+    "build:server": "tsc -p ./server && cp ./firebaseAdminKey.json ./dist/server",
     "lint": "eslint --fix -c ./.eslintrc.js './**/*.{ts,tsx}'",
     "storybook": "start-storybook"
   },
@@ -24,6 +25,7 @@
     "faker": "^4.1.0",
     "firebase": "7.2.2",
     "firebase-admin": "8.6.1",
+    "firebase-functions": "^3.3.0",
     "formik": "^2.0.3",
     "formik-material-ui": "^0.0.22",
     "moment": "^2.24.0",
@@ -84,5 +86,8 @@
       "npm run lint",
       "git add"
     ]
+  },
+  "engines": {
+    "node": "10"
   }
 }
