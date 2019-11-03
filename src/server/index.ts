@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 import * as bodyParser from 'body-parser'
 import session, { SessionOptions } from 'express-session'
-import firebaseAdmin from 'src/firebase/admin'
+import firebaseAdmin from '../firebase/admin'
 import { auth, firestore } from 'firebase-admin'
 import { FireSessionStore } from './FireSessionStore'
 
