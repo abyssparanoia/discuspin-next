@@ -20,7 +20,6 @@ const sessionOptions: SessionOptions = {
 }
 
 export const nextAppFactory = async () => {
-  // try {
   await app.prepare()
   const server = express()
 
@@ -61,11 +60,4 @@ export const nextAppFactory = async () => {
   })
 
   return server
-
-  // server.listen(PORT, () => {
-  //   console.log(`> Ready on http://localhost:${PORT}`)
-  // })
-  // } catch (err) {
-  //   console.error(err)
-  // }
 }
