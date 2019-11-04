@@ -11,8 +11,6 @@ type InitialProps = {
 type Props = {} & InitialProps
 
 const Index = ({ userID }: Props) => {
-  // const authInfo = useContext(AuthContext)
-
   return (
     <>
       {userID && (

@@ -11,7 +11,6 @@ type InitialProps = {
 type Props = {} & InitialProps
 
 const LoginRequired = (_: Props) => {
-  // const authInfo = useContext(AuthContext);
   return (
     <>
       <div>ログイン済みユーザーのみが見れる</div>

@@ -1,16 +1,13 @@
 import * as React from 'react'
 import App, { Container, AppInitialProps, AppContext } from 'next/app'
 import { firebase } from '../firebase/client'
-import { AuthContext, AuthInfo } from '../contexts'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Layout } from 'src/components/Layout'
 import Head from 'next/head'
 import theme from '../thema'
 
-interface State extends AuthInfo {}
-
-export default class extends App<AppInitialProps, State> {
+export default class extends App<AppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {}
 
@@ -19,11 +16,6 @@ export default class extends App<AppInitialProps, State> {
     }
 
     return { pageProps }
-  }
-
-  state = {
-    token: '',
-    userID: ''
   }
 
   componentDidMount() {
@@ -58,12 +50,10 @@ export default class extends App<AppInitialProps, State> {
           <title>gearchange</title>
         </Head>
         <ThemeProvider theme={theme}>
-          <AuthContext.Provider value={{ userID: this.state.userID, token: this.state.token }}>
-            <CssBaseline />
-            <Layout userID={pageProps.userID}>
-              <Component {...pageProps} />
-            </Layout>
-          </AuthContext.Provider>
+          <CssBaseline />
+          <Layout userID={pageProps && pageProps.userID}>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </Container>
     )
