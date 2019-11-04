@@ -47,7 +47,7 @@ export default class extends App<AppInitialProps> {
     return (
       <Container>
         <Head>
-          <title>gearchange</title>
+          <title>discuspin</title>
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
