@@ -1,8 +1,19 @@
 import * as admin from 'firebase-admin'
 
-export default admin.initializeApp({
+admin.initializeApp({
   credential: admin.credential.cert(require('../firebaseAdminKey.json'))
 })
+
+const app = admin.initializeApp({
+  credential: admin.credential.cert(require('../firebaseAdminKey.json'))
+})
+
+const auth = app.auth()
+const db = app.firestore()
+
+export { auth, db }
+
+export default app
 
 declare global {
   namespace Express {

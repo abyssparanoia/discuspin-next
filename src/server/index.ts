@@ -2,8 +2,8 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 import * as bodyParser from 'body-parser'
 import session, { SessionOptions } from 'express-session'
-import firebaseAdmin from '../firebase/admin'
-import { auth, firestore } from 'firebase-admin'
+import firebaseAdmin, { db } from '../firebase/admin'
+import { auth } from 'firebase-admin'
 import { FireSessionStore } from './FireSessionStore'
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -13,7 +13,7 @@ const handle = app.getRequestHandler()
 const sessionOptions: SessionOptions = {
   secret: 'secretString',
   saveUninitialized: true,
-  store: new FireSessionStore({ db: firestore() }),
+  store: new FireSessionStore({ db }),
   resave: false,
   rolling: true,
   cookie: { maxAge: 604800000 } // week
