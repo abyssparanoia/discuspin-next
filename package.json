@@ -7,7 +7,7 @@
     "start:prd": "NODE_ENV=production node ./dist/src/run.js",
     "build": "yarn build:next && yarn build:server",
     "build:next": "next build",
-    "build:server": "tsc -p ./src && cp ./firebaseAdminKey.json ./dist/src/firebaseAdminKey.json",
+    "build:server": "tsc -b ./src/tsconfig.server.json && cp ./firebaseAdminKey.json ./dist/src/firebaseAdminKey.json",
     "lint": "eslint --fix -c ./.eslintrc.js './**/*.{ts,tsx}'",
     "storybook": "start-storybook"
   },
