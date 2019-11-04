@@ -1,12 +1,10 @@
 import * as admin from 'firebase-admin'
 
-admin.initializeApp({
-  credential: admin.credential.cert(require('../firebaseAdminKey.json'))
-})
-
-const app = admin.initializeApp({
-  credential: admin.credential.cert(require('../firebaseAdminKey.json'))
-})
+const app = process.env.GCLOUD_PROJECT
+  ? admin.initializeApp()
+  : admin.initializeApp({
+      credential: admin.credential.cert(require('../firebaseAdminKey.json'))
+    })
 
 const auth = app.auth()
 const db = app.firestore()
