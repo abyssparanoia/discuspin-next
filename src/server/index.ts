@@ -11,10 +11,11 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dir: '.', dev })
 const handle = app.getRequestHandler()
 const sessionOptions: SessionOptions = {
+  name: '__session',
   secret: 'secretString',
-  saveUninitialized: true,
   store: new FireSessionStore({ db }),
   resave: false,
+  saveUninitialized: false,
   rolling: true,
   cookie: { maxAge: 604800000 } // week
 }
