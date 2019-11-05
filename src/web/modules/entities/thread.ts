@@ -21,3 +21,19 @@ export const buildThread = (documentID: string, data: firebase.firestore.Documen
   createdAt: data.createdAt,
   updatedAt: data.updatedAt
 })
+
+export const buildThreadCollectionPath = ({ db, channelID }: { db: firebase.firestore.Firestore; channelID: string }) =>
+  db
+    .collection('channels')
+    .doc(channelID)
+    .collection('threads')
+
+export const buildThreadReference = ({
+  db,
+  channelID,
+  threadID
+}: {
+  db: firebase.firestore.Firestore
+  channelID: string
+  threadID: string
+}) => buildThreadCollectionPath({ db, channelID }).doc(threadID)
