@@ -8,5 +8,5 @@
     "noEmit": false
   },
   "include": ["."],
-  "exclude": ["./pages", "./components", "./contexts", "./firebase/client.ts", "./modules"]
+  "exclude": ["./pages", "./web", "./firebase/client.ts"]
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { db } from 'src/firebase/client'
 // import { useEffectAsync } from './util'
-import * as entities from 'src/modules/entities'
-import { createChannel } from 'src/modules/repositories'
+import * as entities from 'src/web/modules/entities'
+import { createChannel } from 'src/web/modules/repositories'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { CreateChannelForm } from './interface'
 

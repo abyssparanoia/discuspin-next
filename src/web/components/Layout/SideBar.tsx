@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useWatchChannelList } from 'src/modules/services'
+import { useWatchChannelList } from 'src/web/modules/services'
 import ChannelList from '../organisms/ChannelList'
 // import { createStyles, Theme, makeStyles, Grid } from '@material-ui/core'
 

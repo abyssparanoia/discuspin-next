@@ -1,14 +1,13 @@
-import express, { Request, Response } from 'express'
+import { Request, Response, Express } from 'express'
 import next from 'next'
 import * as bodyParser from 'body-parser'
 import session, { SessionOptions } from 'express-session'
 import firebaseAdmin, { db } from '../firebase/admin'
 import { auth } from 'firebase-admin'
-import { FireSessionStore } from './FireSessionStore'
+import { FireSessionStore } from '../FireSessionStore'
 
 const dev = process.env.NODE_ENV !== 'production'
-
-const app = next({ dir: '.', dev })
+const app = next({ dir: '..', dev })
 const handle = app.getRequestHandler()
 const sessionOptions: SessionOptions = {
   name: '__session',
@@ -20,9 +19,8 @@ const sessionOptions: SessionOptions = {
   cookie: { maxAge: 604800000 } // week
 }
 
-export const nextAppFactory = async () => {
+export const nextAppFactory = async (server: Express) => {
   await app.prepare()
-  const server = express()
 
   server.use(bodyParser.json())
   server.use(session(sessionOptions))

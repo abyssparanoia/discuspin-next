@@ -1,11 +1,11 @@
 import * as React from 'react'
 import App, { Container, AppInitialProps, AppContext } from 'next/app'
-import { firebase } from '../firebase/client'
+import { firebase } from 'src/firebase/client'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { Layout } from 'src/components/Layout'
+import { Layout } from 'src/web/components/Layout'
 import Head from 'next/head'
-import theme from '../thema'
+import theme from '../web/thema'
 
 export default class extends App<AppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext) {

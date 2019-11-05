@@ -1,5 +1,5 @@
 import { db } from 'src/firebase/client'
-import { buildChannel, Channel } from 'src/modules/entities/channel'
+import { buildChannel, Channel } from 'src/web/modules/entities/channel'
 import moment from 'moment'
 
 // チャンネルを取得する

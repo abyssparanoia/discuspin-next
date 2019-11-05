@@ -1,10 +1,10 @@
-import { nextAppFactory } from './server'
+import { appFactory } from './server'
 
 const PORT = process.env.PORT || 3000
 
 const run = async () => {
   try {
-    const server = await nextAppFactory()
+    const server = await appFactory()
     server.listen(PORT, () => {
       console.log(`> Ready on http://localhost:${PORT}`)
     })

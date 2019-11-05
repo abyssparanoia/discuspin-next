@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { CreateChannelForm as ICreateChannelForm } from 'src/modules/services'
+import { CreateChannelForm as ICreateChannelForm } from 'src/web/modules/services'
 import { Button, CircularProgress } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 

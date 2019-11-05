@@ -1,5 +1,5 @@
 import React from 'react'
-import { authenticate } from 'src/modules/services'
+import { authenticate } from 'src/web/modules/services'
 import { ExNextPageContext } from 'next'
 import Link from 'next/link'
 

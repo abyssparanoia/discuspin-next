@@ -11,10 +11,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 // import DialogContentText from '@material-ui/core/DialogContentText'
 // import DialogTitle from '@material-ui/core/DialogTitle'
 import Link from 'next/link'
-import { Channel } from 'src/modules/entities'
+import { Channel } from 'src/web/modules/entities'
 import { useRouter } from 'next/router'
-import { CreateChannelForm } from 'src/components/moleclues/ChannelForm'
-import { useCreateChannel } from 'src/modules/services'
+import { CreateChannelForm } from 'src/web/components/moleclues/ChannelForm'
+import { useCreateChannel } from 'src/web/modules/services'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
