@@ -37,7 +37,7 @@ interface Props {
 export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
   const classes = useStyles()
   let values: ICreateChannelForm = {
-    name: '',
+    title: '',
     description: ''
   }
 
@@ -49,8 +49,8 @@ export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
         const errors: Partial<ICreateChannelForm> = {}
         const requiredMsg: string = '必須項目です。'
 
-        if (!values.name) {
-          errors.name = requiredMsg
+        if (!values.title) {
+          errors.title = requiredMsg
         }
 
         if (!values.description) {
@@ -66,7 +66,7 @@ export const CreateChannelForm = ({ onSubmit, onClose }: Props) => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Field name="name" type="text" label="title" className={classes.formFields} component={TextField} />
+          <Field name="title" type="text" label="title" className={classes.formFields} component={TextField} />
           <Field
             name="description"
             type="text"

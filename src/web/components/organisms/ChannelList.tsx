@@ -12,7 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent'
 // import DialogTitle from '@material-ui/core/DialogTitle'
 import Link from 'next/link'
 import { Channel } from 'src/web/modules/entities'
-import { useRouter } from 'next/router'
 import { CreateChannelForm } from 'src/web/components/moleclues/ChannelForm'
 import { useCreateChannel } from 'src/web/modules/services'
 
@@ -74,15 +73,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   channels: Channel[]
+  channelID?: string
 }
 
-export const ChannelList = ({ channels }: Props) => {
+export const ChannelList = ({ channels, channelID }: Props) => {
   const [isDialog, setIsDialog] = useState<boolean>(false)
   const { handleSubmit } = useCreateChannel()
   const classes = useStyles()
-  const router = useRouter()
-
-  const channelID = (router.query.channelID as unknown) as string | undefined
 
   return (
     <div className={classes.root}>
@@ -102,11 +99,11 @@ export const ChannelList = ({ channels }: Props) => {
         </Tooltip>
       </div>
 
-      {channels.map(item => {
+      {channels.map(channel => {
         return (
-          <div key={item.id} className={item.id === channelID ? classes.channelActive : classes.channel}>
-            <Link href={`/channels/[channelID]`} as={`/channels/${item.id}`}>
-              <a>{item.title}</a>
+          <div key={channel.id} className={channel.id === channelID ? classes.channelActive : classes.channel}>
+            <Link href={`/channels/[channelID]`} as={`/channels/${channel.id}`}>
+              <a>{channel.title}</a>
             </Link>
           </div>
         )

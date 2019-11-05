@@ -1,4 +1,4 @@
 export interface CreateChannelForm {
-  name: string
+  title: string
   description: string
 }

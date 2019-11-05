@@ -1,26 +1,13 @@
 import { db } from 'src/firebase/client'
-import { buildChannel, Channel } from 'src/web/modules/entities/channel'
+import { Channel } from 'src/web/modules/entities/channel'
 import moment from 'moment'
 
-// チャンネルを取得する
-export const getChannels = async () => {
-  const qsnp = await db
-    .collection('channels')
-    .orderBy('createdAt', 'desc')
-    .get()
-    .catch(error => {
-      throw new Error(`firestoreからのデータ取得に失敗しました [${error}]`)
-    })
-  return qsnp.docs.map(doc => buildChannel(doc.id, doc.data()))
-}
-
-// チャンネルを追加する
-export const createChannel = async (name: string, description: string) => {
+export const createChannel = async ({ title, description }: { title: string; description: string }) => {
   const newDoc = db.collection('channels').doc()
   const data: Channel = {
     id: newDoc.id,
-    title: name,
-    description: description,
+    title,
+    description,
     enabled: true,
     createdAt: +moment().format('X'),
     updatedAt: +moment().format('X')
