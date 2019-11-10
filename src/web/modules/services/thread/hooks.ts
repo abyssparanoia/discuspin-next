@@ -8,7 +8,10 @@ import { CreateThreadForm } from './interface'
 export const useWatchThreadList = ({ channelID }: { channelID: string }) => {
   console.log(channelID)
   const [value, loading, error] = useCollection(
-    entities.buildThreadCollectionPath({ db }).orderBy('updatedAt', 'desc'),
+    entities
+      .buildThreadCollectionPath({ db })
+      .where('channelID', '==', channelID)
+      .orderBy('updatedAt', 'desc'),
     {
       snapshotListenOptions: { includeMetadataChanges: true }
     }
