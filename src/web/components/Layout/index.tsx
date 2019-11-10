@@ -38,7 +38,7 @@ export const Layout: React.FunctionComponent<Props> = ({ children, title = 'This
       {error && <div>{error.message}</div>}
       {userID && (
         <Grid container className={classes.root}>
-          <SideBar />
+          <SideBar userID={userID} />
           {children}
         </Grid>
       )}
