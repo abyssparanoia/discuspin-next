@@ -11,7 +11,7 @@ type InitialProps = {
 
 type Props = {} & InitialProps
 
-const Channels = (_: Props) => {
+const Channel = (_: Props) => {
   const router = useRouter()
   const channelID = (router.query.channelID as unknown) as string
   return (
@@ -24,9 +24,9 @@ const Channels = (_: Props) => {
   )
 }
 
-Channels.getInitialProps = async ({ req, res }: ExNextPageContext): Promise<InitialProps> => {
+Channel.getInitialProps = async ({ req, res }: ExNextPageContext): Promise<InitialProps> => {
   const { userID, token } = await authenticate(req, res, true)
   return { userID: userID!, token: token! }
 }
 
-export default Channels
+export default Channel

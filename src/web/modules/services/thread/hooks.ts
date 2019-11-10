@@ -6,16 +6,17 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { CreateThreadForm } from './interface'
 
 export const useWatchThreadList = ({ channelID }: { channelID: string }) => {
+  console.log(channelID)
   const [value, loading, error] = useCollection(
-    entities.buildThreadCollectionPath({ db, channelID }).orderBy('updatedAt', 'desc'),
+    entities.buildThreadCollectionPath({ db }).orderBy('updatedAt', 'desc'),
     {
       snapshotListenOptions: { includeMetadataChanges: true }
     }
   )
 
-  const threads = value ? value.docs.map(qsnp => entities.buildThread(qsnp.id, qsnp.data())) : []
+  const threadList = value ? value.docs.map(qsnp => entities.buildThread(qsnp.id, qsnp.data())) : []
 
-  return { threads, loading, error }
+  return { threadList, loading, error }
 }
 
 export const useCreateThread = ({ channelID, userID }: { channelID: string; userID: string }) => {

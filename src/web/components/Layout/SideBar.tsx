@@ -1,12 +1,17 @@
 import * as React from 'react'
-import { useWatchChannelList } from 'src/web/modules/services'
-import ChannelList from '../organisms/ChannelList'
+import { ChannelList } from '../organisms/ChannelList'
+import { ThreadList } from '../organisms/ThreadList'
 import { useRouter } from 'next/router'
 
 export const SideBar = () => {
-  const watchChannelsRef = useWatchChannelList()
   const router = useRouter()
   const channelID = router.query.channelID as string | undefined
+  const threadID = router.query.threadID as string | undefined
 
-  return <ChannelList channels={watchChannelsRef.channels} channelID={channelID} />
+  return (
+    <>
+      <ChannelList channelID={channelID} />
+      {channelID && <ThreadList channelID={channelID} threadID={threadID} />}
+    </>
+  )
 }

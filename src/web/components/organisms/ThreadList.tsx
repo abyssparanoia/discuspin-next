@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
+// import React, { useState } from 'react'
 
 // material ui
-import { Tooltip, Fab, Button } from '@material-ui/core'
+// import { Tooltip, Fab, Button } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
+// import AddIcon from '@material-ui/icons/Add'
 // import Button from '@material-ui/core/Button'
 // import TextField from '@material-ui/core/TextField'
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
+// import Dialog from '@material-ui/core/Dialog'
+// import DialogContent from '@material-ui/core/DialogContent'
 // import DialogContentText from '@material-ui/core/DialogContentText'
 // import DialogTitle from '@material-ui/core/DialogTitle'
 import Link from 'next/link'
-import { CreateChannelForm } from 'src/web/components/moleclues/ChannelForm'
-import { useCreateChannel, useWatchChannelList } from 'src/web/modules/services'
+// import { Thread } from 'src/web/modules/entities'
+import { useWatchThreadList } from 'src/web/modules/services'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: '12px',
       fontSize: '12px'
     },
-    channel: {
+    thread: {
       fontSize: '13px',
       padding: '24px 12px',
       cursor: 'pointer',
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
         background: '#424242'
       }
     },
-    channelActive: {
+    threadActive: {
       fontSize: '13px',
       padding: '24px 12px',
       cursor: 'pointer',
@@ -71,14 +72,15 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface Props {
-  channelID?: string
+  channelID: string
+  threadID?: string
 }
 
-export const ChannelList = ({ channelID }: Props) => {
-  const [isDialog, setIsDialog] = useState<boolean>(false)
-  const { handleSubmit } = useCreateChannel()
+export const ThreadList = ({ channelID, threadID }: Props) => {
+  //   const [isDialog, setIsDialog] = useState<boolean>(false)
+  //   const { handleSubmit } = useCreateChannel()
+  const { threadList } = useWatchThreadList({ channelID })
   const classes = useStyles()
-  const { channelList } = useWatchChannelList()
 
   return (
     <div className={classes.root}>
@@ -90,31 +92,31 @@ export const ChannelList = ({ channelID }: Props) => {
           marginBottom: '16px'
         }}
       >
-        <div className={classes.title}>チャンネル一覧</div>
-        <Tooltip title="Add" aria-label="Add">
+        <div className={classes.title}>スレッド一覧</div>
+        {/* <Tooltip title="Add" aria-label="Add">
           <Fab color="secondary" className={classes.addBtn} size="small" onClick={() => setIsDialog(true)}>
             <AddIcon />
           </Fab>
-        </Tooltip>
+        </Tooltip> */}
       </div>
 
-      {channelList.map(channel => {
+      {threadList.map(thread => {
         return (
-          <div key={channel.id} className={channel.id === channelID ? classes.channelActive : classes.channel}>
-            <Link href={`/channels/[channelID]`} as={`/channels/${channel.id}`}>
-              <a>{channel.title}</a>
+          <div key={thread.id} className={thread.id === threadID ? classes.threadActive : classes.thread}>
+            <Link href={`/channels/[channelID]/threads/[threadID]`} as={`/channels/${channelID}/threads/${thread.id}`}>
+              <a>{thread.title}</a>
             </Link>
           </div>
         )
       })}
-      <Dialog open={isDialog} aria-labelledby="form-dialog-title">
+      {/* <Dialog open={isDialog} aria-labelledby="form-dialog-title">
         <DialogContent>
           <CreateChannelForm onSubmit={handleSubmit} onClose={() => setIsDialog(false)} />
         </DialogContent>
         <Button onClick={() => setIsDialog(false)} color="primary">
           キャンセル
         </Button>
-      </Dialog>
+      </Dialog> */}
     </div>
   )
 }
