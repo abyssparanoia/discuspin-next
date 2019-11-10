@@ -19,3 +19,8 @@ export const buildUser = (documentID: string, data: firebase.firestore.DocumentD
   createdAt: data.createdAt,
   updatedAt: data.updatedAt
 })
+
+export const buildUserCollectionPath = ({ db }: { db: firebase.firestore.Firestore }) => db.collection('users')
+
+export const buildUserReference = ({ db, userID }: { db: firebase.firestore.Firestore; userID: string }) =>
+  buildUserCollectionPath({ db }).doc(userID)
