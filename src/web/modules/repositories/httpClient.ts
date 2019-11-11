@@ -1,43 +1,42 @@
-import { default as axios, AxiosResponse, AxiosError } from 'axios'
+import { default as axios, AxiosResponse, AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios'
 
 export class AxiosClient {
   public basedUrl: string
   public token?: string
-
-  private readonly axiosInstance = axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: this.token ? `Bearer ${this.token}` : ''
-    }
-  })
+  private axiosInstance: AxiosInstance
 
   public constructor({ url, token }: { url: string; token?: string }) {
     this.basedUrl = url
     this.token = token
+    this.axiosInstance = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: this.token ? `Bearer ${this.token}` : ''
+      }
+    })
   }
 
-  public async get<T = any>(params: object = {}, id?: string): Promise<AxiosResponse<T>> {
-    const url = id === undefined ? this.basedUrl : `${this.basedUrl}/${id}`
-    return this.axiosInstance.get(url, { params })
+  public async get<T = any>(params: object = {}, option: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.get(this.basedUrl, { params, ...option })
   }
 
-  public async post<T = any>(params: object): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post(this.basedUrl, params)
+  public async post<T = any>(params: object, option: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.post(this.basedUrl, params, option)
   }
 
-  public async put<T = any>(params: object, id: string): Promise<AxiosResponse<T>> {
-    const url = `${this.basedUrl}/${id}`
-    return this.axiosInstance.put(url, params)
+  public async put<T = any>(params: object, option: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.put(this.basedUrl, params, option)
   }
 
-  public async patch<T = any>(params: object, id: string): Promise<AxiosResponse<T>> {
-    const url = `${this.basedUrl}/${id}`
-    return this.axiosInstance.patch(url, params)
+  public async patch<T = any>(params: object, option: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.patch(this.basedUrl, params, option)
   }
 
-  public async delete<T = any>(id: string): Promise<AxiosResponse<T>> {
-    const url = `${this.basedUrl}/${id}`
-    return this.axiosInstance.delete(url)
+  public async delete<T = any>(): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.delete(this.basedUrl, {
+      headers: { 'Content-Type': 'application/json', Authorization: this.token ? `Bearer ${this.token}` : '' },
+      data: null
+    })
   }
 }
 

@@ -16,19 +16,13 @@ export const fetchUserOrFail = async (userID: string): Promise<User> => {
   return buildUser(doc.id, doc.data()!)
 }
 
-export const createUser = async (
-  userID: string,
-  displayName: string,
-  position?: string,
-  description?: string,
-  avatarURL?: string
-) => {
+export const createUser = async (userID: string, displayName?: string, avatarURL?: string) => {
   const timestamp = moment().format('X')
   const data: User = {
     id: userID,
-    displayName,
-    position,
-    description,
+    displayName: displayName || 'ゲストさん',
+    position: '学生',
+    description: '',
     avatarURL:
       avatarURL ||
       'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83',

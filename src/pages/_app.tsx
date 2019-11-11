@@ -1,6 +1,5 @@
 import * as React from 'react'
-import App, { Container, AppInitialProps, AppContext } from 'next/app'
-import { firebase } from 'src/firebase/client'
+import App, { AppInitialProps, AppContext } from 'next/app'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Layout } from 'src/web/components/Layout'
@@ -18,34 +17,11 @@ export default class extends App<AppInitialProps> {
     return { pageProps }
   }
 
-  componentDidMount() {
-    firebase.auth().onIdTokenChanged(async user => {
-      // 認証が有効だった場合、サーバーサイドのtokenとuser情報を更新する
-      if (user) {
-        const result = await user.getIdTokenResult()
-        const { token } = result
-        this.setState({ token, userID: user.uid })
-        await fetch('/api/sign_in', {
-          method: 'POST',
-          headers: new Headers({ 'Content-Type': 'application/json' }),
-          credentials: 'same-origin',
-          body: JSON.stringify({ token })
-        })
-        // 認証が無効だった場合は、サーバーサイドに保存してあるsessionを破棄する
-      } else {
-        await fetch('/api/sign_out', {
-          method: 'POST',
-          credentials: 'same-origin'
-        })
-      }
-    })
-  }
-
   render() {
     const { Component, pageProps } = this.props
 
     return (
-      <Container>
+      <>
         <Head>
           <title>discuspin</title>
         </Head>
@@ -55,7 +31,7 @@ export default class extends App<AppInitialProps> {
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>
-      </Container>
+      </>
     )
   }
 }

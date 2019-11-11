@@ -8,34 +8,40 @@ export const authenticate = async (
   req: ExNextPageContext['req'],
   res: ExNextPageContext['res'],
   loginRequired: boolean
-): Promise<{ userID?: string; token?: string }> => {
+): Promise<{ userID?: string; token?: string; role: 'admin' | 'member' | undefined }> => {
   let userID: string | undefined = undefined
   let token: string | undefined = undefined
+  let role: 'admin' | 'member' | undefined = undefined
   // サーバー上での処理
   if (req && req.session) {
-    const user = req.session.firebaseUser
-    token = req.session.firebaseToken
+    const credential = req.session.credential
     // userがnullの場合は未認証なので、sign_inにredirectする
-    if (!user && loginRequired) {
+    if (!credential && loginRequired) {
       res!.writeHead(302, {
         Location: '/sign_in'
       })
       res!.end()
     }
-    userID = user ? user.uid : undefined
+    userID = credential ? credential.uid : undefined
+    role = credential ? credential.role : undefined
+    token = credential ? credential.token : undefined
     // ブラウザ上での処理
   } else {
     const user = auth.currentUser
     if (user) {
       userID = user.uid
-      token = await user.getIdTokenResult(true).then(result => result.token)
+      const idTokenResult = await user.getIdTokenResult(true)
+      role = idTokenResult.claims.role
+      token = idTokenResult.token
     } else if (loginRequired) {
       // redirect
       Router.push('/sign_in')
     }
   }
 
-  return { userID, token }
+  console.log({ userID, token, role })
+
+  return { userID, token, role }
 }
 
 interface ISignInWithEmailAndPassword {

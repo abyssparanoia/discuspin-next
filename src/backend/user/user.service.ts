@@ -24,7 +24,7 @@ export class UserService {
       throw new NotFoundException('user not found')
     }
 
-    return this.buildUser(dsnp.id, dsnp.data)
+    return this.buildUser(dsnp.id, dsnp.data()!)
   }
 
   private buildUser = (documentID: string, data: admin.firestore.DocumentData): UserEntity => ({

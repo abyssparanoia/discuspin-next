@@ -12,15 +12,3 @@ const db = app.firestore()
 export { auth, db, admin }
 
 export default app
-
-declare global {
-  namespace Express {
-    interface Request {
-      firebaseServer: admin.app.App
-    }
-    interface Session {
-      firebaseUser: admin.auth.DecodedIdToken
-      firebaseToken: string
-    }
-  }
-}

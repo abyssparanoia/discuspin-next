@@ -2,8 +2,10 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 import * as bodyParser from 'body-parser'
 import session, { SessionOptions } from 'express-session'
-import firebaseAdmin, { db } from './firebase/admin'
-import { auth } from 'firebase-admin'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import firebaseAdmin, { db, admin } from './firebase/admin'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Credential } from './firebase/interface'
 import { FireSessionStore } from './FireSessionStore'
 import { nestAppFactory } from './backend/main'
 
@@ -20,6 +22,19 @@ const sessionOptions: SessionOptions = {
   cookie: { maxAge: 604800000 } // week
 }
 
+declare global {
+  namespace Express {
+    interface Request {
+      firebaseServer: admin.app.App
+    }
+    interface Session {
+      firebaseUser: admin.auth.DecodedIdToken
+      credential?: Credential
+      firebaseToken: string
+    }
+  }
+}
+
 export const appFactory = async () => {
   await app.prepare()
   const server = express()
@@ -32,30 +47,20 @@ export const appFactory = async () => {
     next()
   })
 
-  // nextjs routing
   server.get('*', (req, res) => handle(req, res))
 
-  // set firebase user in session store
-  server.post('/api/sign_in', async (req: Request, res: Response) => {
+  // set credential in session store
+  server.post('/session', async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400)
 
-    const { token } = req.body
+    const credential = req.body
 
-    const user = (await firebaseAdmin
-      .auth()
-      .verifyIdToken(token)
-      .catch((err: Error) => {
-        console.error(err)
-        res.status(403).send({ err })
-      })) as auth.DecodedIdToken // ここneverとかで返したかった
-
-    req.session!.firebaseUser = user
-    req.session!.firebaseToken = token
+    req.session!.credential = credential
 
     return res.sendStatus(200)
   })
 
-  server.post('/api/sign_out', (req: Request, res: Response) => {
+  server.delete('/session', (req: Request, res: Response) => {
     req.session = undefined
     return res.sendStatus(200)
   })
