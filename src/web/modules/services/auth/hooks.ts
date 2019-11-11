@@ -39,8 +39,6 @@ export const authenticate = async (
     }
   }
 
-  console.log({ userID, token, role })
-
   return { userID, token, role }
 }
 
