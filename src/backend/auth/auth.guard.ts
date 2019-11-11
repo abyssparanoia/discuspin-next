@@ -7,18 +7,15 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest()
-    // const { authorization } = request.headers
+    const { authorization } = request.headers
 
-    // if (!authorization || !authorization.startsWith('Bearer ')) {
-    //   throw new HttpException({ message: 'no authrization header' }, HttpStatus.UNAUTHORIZED)
-    // }
-
-    // const token = authorization.slice(7)
-    // const decodedToken = await this.authService.verifyIdToken(token)
-    // request.user = decodedToken
-    if (!request.firebaseUser) {
-      throw new HttpException({ message: 'unauthorized' }, HttpStatus.UNAUTHORIZED)
+    if (!authorization || !authorization.startsWith('Bearer ')) {
+      throw new HttpException({ message: 'no authrization header' }, HttpStatus.UNAUTHORIZED)
     }
+
+    const token = authorization.slice(7)
+    const decodedToken = await this.authService.verifyIdToken(token)
+    request.authUser = decodedToken
     return true
   }
 }
