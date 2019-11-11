@@ -1,7 +1,8 @@
-import { Controller, Post, UseGuards, Req } from '@nestjs/common'
+import { Controller, Post, UseGuards } from '@nestjs/common'
 import { AppService } from './app.service'
 import { AuthGuard } from './auth/auth.guard'
-// import { Request } from 'express'
+import { AuthUser } from './auth/auth.decorator'
+import { auth } from 'firebase-admin'
 
 @Controller()
 export class AppController {
@@ -9,8 +10,8 @@ export class AppController {
 
   @Post()
   @UseGuards(AuthGuard)
-  getHello(@Req() request: any): string {
-    console.log(request.user)
-    return this.appService.getHello()
+  getHello(@AuthUser() authUser: auth.DecodedIdToken): auth.DecodedIdToken {
+    console.log(authUser)
+    return authUser
   }
 }
