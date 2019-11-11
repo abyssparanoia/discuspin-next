@@ -9,7 +9,7 @@ const app = process.env.GCLOUD_PROJECT
 const auth = app.auth()
 const db = app.firestore()
 
-export { auth, db }
+export { auth, db, admin }
 
 export default app
 

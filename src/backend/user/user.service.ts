@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { db } from 'src/firebase/admin'
+import { db, admin } from '../../firebase/admin'
 
 interface UserEntity {
   id: string
@@ -27,7 +27,7 @@ export class UserService {
     return this.buildUser(dsnp.id, dsnp.data)
   }
 
-  private buildUser = (documentID: string, data: firebase.firestore.DocumentData): UserEntity => ({
+  private buildUser = (documentID: string, data: admin.firestore.DocumentData): UserEntity => ({
     id: documentID,
     displayName: data.displayName,
     description: data.description,
