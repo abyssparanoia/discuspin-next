@@ -6,7 +6,6 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { CreateThreadForm } from './interface'
 
 export const useWatchThreadList = ({ channelID }: { channelID: string }) => {
-  console.log(channelID)
   const [value, loading, error] = useCollection(
     entities
       .buildThreadCollectionPath({ db })
