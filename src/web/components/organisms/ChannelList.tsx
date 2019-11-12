@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import Link from 'next/link'
 import { CreateChannelForm } from 'src/web/components/moleclues/ChannelForm'
 import { useCreateChannel, useWatchChannelList } from 'src/web/modules/services'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,14 +65,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-interface Props {
-  channelID?: string
-}
+interface Props {}
 
-export const ChannelList = ({ channelID }: Props) => {
+export const ChannelList = (_: Props) => {
   const [isDialog, setIsDialog] = useState<boolean>(false)
   const { handleSubmit } = useCreateChannel()
   const classes = useStyles()
+  const router = useRouter()
+  const channelID = router.query.channelID as string | undefined
   const { channelList } = useWatchChannelList()
 
   return (

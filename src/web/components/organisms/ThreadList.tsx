@@ -5,9 +5,9 @@ import AddIcon from '@material-ui/icons/Add'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import Link from 'next/link'
-// import { Thread } from 'src/web/modules/entities'
 import { useWatchThreadList, useCreateThread } from 'src/web/modules/services'
 import { CreateThreadForm } from 'src/web/components/moleclues/ThreadForm'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,13 +66,14 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface Props {
-  channelID: string
   uid: string
-  threadID?: string
 }
 
-export const ThreadList = ({ channelID, threadID, uid }: Props) => {
+export const ThreadList = ({ uid }: Props) => {
   const [isDialog, setIsDialog] = useState<boolean>(false)
+  const router = useRouter()
+  const channelID = router.query.channelID as string
+  const threadID = router.query.threadID as string | undefined
   const { handleSubmit } = useCreateThread({ channelID, userID: uid })
   const { threadList } = useWatchThreadList({ channelID })
   const classes = useStyles()

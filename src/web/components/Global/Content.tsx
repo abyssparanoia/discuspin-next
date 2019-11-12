@@ -10,12 +10,11 @@ interface Props {
 export const Content = ({ uid }: Props) => {
   const router = useRouter()
   const channelID = router.query.channelID as string | undefined
-  const threadID = router.query.threadID as string | undefined
 
   return (
     <>
-      <ChannelList channelID={channelID} />
-      {channelID && <ThreadList channelID={channelID} threadID={threadID} uid={uid} />}
+      <ChannelList />
+      {channelID && <ThreadList uid={uid} />}
     </>
   )
 }
