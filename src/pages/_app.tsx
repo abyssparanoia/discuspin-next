@@ -27,7 +27,7 @@ export default class extends App<AppInitialProps> {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Layout userID={pageProps && pageProps.userID}>
+          <Layout userID={pageProps && pageProps.uid}>
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>

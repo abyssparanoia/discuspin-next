@@ -2,12 +2,10 @@ import React from 'react'
 import { authenticate } from 'src/web/modules/services'
 import { ExNextPageContext } from 'next'
 import Link from 'next/link'
+import { Credential } from 'src/firebase/interface'
 import { useRouter } from 'next/router'
 
-type InitialProps = {
-  token: string
-  userID: string
-}
+type InitialProps = Credential
 
 type Props = {} & InitialProps
 
@@ -27,8 +25,8 @@ const Thread = (_: Props) => {
 }
 
 Thread.getInitialProps = async ({ req, res }: ExNextPageContext): Promise<InitialProps> => {
-  const { userID, token } = await authenticate(req, res, true)
-  return { userID: userID!, token: token! }
+  const credential = await authenticate(req, res, true)
+  return credential!
 }
 
 export default Thread

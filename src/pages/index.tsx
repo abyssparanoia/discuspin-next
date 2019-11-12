@@ -1,26 +1,24 @@
 import React from 'react'
 import { ExNextPageContext } from 'next'
 import { authenticate } from '../web/modules/services'
+import { Credential } from 'src/firebase/interface'
 import Link from 'next/link'
 
-type InitialProps = {
-  token?: string
-  userID?: string
-}
+type InitialProps = Partial<Credential>
 
 type Props = {} & InitialProps
 
-const Index = ({ userID }: Props) => {
+const Index = ({ uid }: Props) => {
   return (
     <>
-      {userID && (
+      {uid && (
         <>
           <div>認証時はこれが表示される</div>
-          <div>firebase uid: {userID}</div>
+          <div>firebase uid: {uid}</div>
         </>
       )}
 
-      {!userID && (
+      {!uid && (
         <>
           <div>未認証時はこれが表示される</div>
         </>
@@ -33,8 +31,9 @@ const Index = ({ userID }: Props) => {
 }
 
 Index.getInitialProps = async ({ req, res }: ExNextPageContext): Promise<InitialProps> => {
-  const { userID, token } = await authenticate(req, res, false)
-  return { token, userID }
+  const credential = await authenticate(req, res, true)
+  if (!credential) return {}
+  return credential
 }
 
 export default Index

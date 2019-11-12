@@ -28,9 +28,7 @@ declare global {
       firebaseServer: admin.app.App
     }
     interface Session {
-      firebaseUser: admin.auth.DecodedIdToken
       credential?: Credential
-      firebaseToken: string
     }
   }
 }

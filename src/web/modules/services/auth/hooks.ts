@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ExNextPageContext } from 'next'
 import { auth } from 'src/firebase/client'
+import { Credential } from 'src/firebase/interface'
 import Router from 'next/router'
 import * as repositoris from 'src/web/modules/repositories'
 
@@ -8,10 +9,8 @@ export const authenticate = async (
   req: ExNextPageContext['req'],
   res: ExNextPageContext['res'],
   loginRequired: boolean
-): Promise<{ userID?: string; token?: string; role: 'admin' | 'member' | undefined }> => {
-  let userID: string | undefined = undefined
-  let token: string | undefined = undefined
-  let role: 'admin' | 'member' | undefined = undefined
+): Promise<Credential | undefined> => {
+  let credential: Credential | undefined = undefined
   // サーバー上での処理
   if (req && req.session) {
     const credential = req.session.credential
@@ -22,24 +21,26 @@ export const authenticate = async (
       })
       res!.end()
     }
-    userID = credential ? credential.uid : undefined
-    role = credential ? credential.role : undefined
-    token = credential ? credential.token : undefined
+    return credential
     // ブラウザ上での処理
   } else {
     const user = auth.currentUser
     if (user) {
-      userID = user.uid
       const idTokenResult = await user.getIdTokenResult(true)
-      role = idTokenResult.claims.role
-      token = idTokenResult.token
+      return {
+        uid: user.uid,
+        token: idTokenResult.token,
+        role: idTokenResult.claims.role,
+        displayName: user.displayName!,
+        avatarURL: user.photoURL!
+      }
     } else if (loginRequired) {
       // redirect
       Router.push('/sign_in')
     }
   }
 
-  return { userID, token, role }
+  return credential
 }
 
 interface ISignInWithEmailAndPassword {
