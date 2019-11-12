@@ -6,7 +6,7 @@ import { useEffectAsync } from '../util'
 export const useUpdateUser = ({ uid }: { uid: string }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [error, setError] = useState<Error | undefined>(undefined)
-  const [user, setUser] = useState<User | undefined>(undefined)
+  const [initialValue, setInitialValue] = useState<User | undefined>(undefined)
 
   useEffectAsync(() => {
     setIsLoading(true)
@@ -14,7 +14,7 @@ export const useUpdateUser = ({ uid }: { uid: string }) => {
     fetchUserOrFail(uid)
       .then(user => {
         setIsLoading(false)
-        setUser(user)
+        setInitialValue(user)
       })
       .catch(err => {
         setIsLoading(false)
@@ -22,5 +22,5 @@ export const useUpdateUser = ({ uid }: { uid: string }) => {
       })
   })
 
-  return { user, isLoading, error }
+  return { initialValue, isLoading, error }
 }
