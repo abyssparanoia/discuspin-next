@@ -46,7 +46,7 @@ export const MenuAppBar = ({ uid, avatarURL }: Props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <Link href="/">NextJS Firebase Boilerplate</Link>{' '}
+            <Link href="/">Discuspin</Link>{' '}
           </Typography>
           {uid && (
             <div>
