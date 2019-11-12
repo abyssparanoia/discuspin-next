@@ -48,6 +48,10 @@ export const createSession = async (firebaseUser: firebase.User | null) => {
   const credential: Credential = {
     uid: firebaseUser.uid,
     token: newIdTokenResult.token,
+    displayName: firebaseUser.displayName || '名無しさん',
+    avatarURL:
+      firebaseUser.photoURL ||
+      'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83',
     role: newIdTokenResult.claims.role
   }
 

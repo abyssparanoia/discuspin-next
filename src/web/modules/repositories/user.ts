@@ -29,12 +29,18 @@ export const createUser = async (userID: string, displayName?: string, avatarURL
     createdAt: +timestamp,
     updatedAt: +timestamp
   }
-  try {
-    await buildUserReference({ db, userID }).set(data)
-    return data
-  } catch (error) {
-    throw new Error(`ユーザーの追加に失敗しました${error}`)
-  }
+  await buildUserReference({ db, userID })
+    .set(data)
+    .catch(error => {
+      throw new Error(`ユーザーの追加に失敗しました${error}`)
+    })
+
+  await auth.currentUser!.updateProfile({
+    displayName: 'ゲストさん',
+    photoURL:
+      'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83'
+  })
+  return data
 }
 
 export const updateUser = async (
@@ -50,12 +56,10 @@ export const updateUser = async (
 
   const data: Omit<User, 'id' | 'createdAt'> = {
     updatedAt: timestamp,
-    displayName: displayName || '名無しさん',
-    position: position,
-    description: description,
-    avatarURL:
-      avatarURL ||
-      'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83'
+    displayName: displayName || user.displayName,
+    position: position || user.position,
+    description: description || user.description,
+    avatarURL: avatarURL || user.avatarURL
   }
 
   await buildUserReference({ db, userID })
@@ -63,6 +67,11 @@ export const updateUser = async (
     .catch(error => {
       throw new Error(`ユーザーの編集に失敗しました${error}`)
     })
+
+  await auth.currentUser!.updateProfile({
+    displayName: displayName || user.displayName,
+    photoURL: avatarURL || user.avatarURL
+  })
 
   return { ...user, ...data }
 }
