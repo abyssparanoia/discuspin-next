@@ -38,8 +38,6 @@ export const MenuAppBar = ({ uid, avatarURL }: Props) => {
 
   const handleClose = () => setAnchorEl(undefined)
 
-  console.log(avatarURL)
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
