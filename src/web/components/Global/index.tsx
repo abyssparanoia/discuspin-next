@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { MenuAppBar } from './AppBar'
 import { useSignOut } from 'src/web/modules/services'
 import { Credential } from 'src/firebase/interface'
-import { SideBar } from './SideBar'
+import { Content } from './Content'
 import { createStyles, Theme, makeStyles, Grid } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,7 +36,7 @@ export const Global: React.FunctionComponent<Props> = ({ children, uid }) => {
       {error && <div>{error.message}</div>}
       {uid && (
         <Grid container className={classes.root}>
-          <SideBar uid={uid} />
+          <Content uid={uid} />
           {children}
         </Grid>
       )}

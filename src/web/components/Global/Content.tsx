@@ -7,7 +7,7 @@ interface Props {
   uid: string
 }
 
-export const SideBar = ({ uid }: Props) => {
+export const Content = ({ uid }: Props) => {
   const router = useRouter()
   const channelID = router.query.channelID as string | undefined
   const threadID = router.query.threadID as string | undefined
