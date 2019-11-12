@@ -9,7 +9,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 // import Link from 'next/link'
+import { Credential } from 'src/firebase/interface'
 import { Link } from 'src/web/components/atoms'
+import { useSignOut } from 'src/web/modules/services'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,19 +25,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-interface Props {
-  uid?: string
-  handleSignOut: () => void
-}
+interface Props extends Partial<Credential> {}
 
-export const MenuAppBar = ({ uid, handleSignOut }: Props) => {
+export const MenuAppBar = ({ uid, avatarURL }: Props) => {
   const classes = useStyles({})
   const [anchorEl, setAnchorEl] = React.useState<EventTarget & HTMLButtonElement | undefined>(undefined)
+  const { handleSignOut } = useSignOut()
+
   const open = Boolean(anchorEl)
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setAnchorEl(e.currentTarget)
 
   const handleClose = () => setAnchorEl(undefined)
+
+  console.log(avatarURL)
 
   return (
     <div className={classes.root}>
@@ -56,7 +59,21 @@ export const MenuAppBar = ({ uid, handleSignOut }: Props) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                {avatarURL ? (
+                  <img
+                    alt="avatar url"
+                    style={{
+                      width: '30px',
+                      height: '30px',
+                      borderRadius: '50%',
+                      objectFit: 'cover',
+                      marginRight: '8px'
+                    }}
+                    src={avatarURL}
+                  />
+                ) : (
+                  <AccountCircle />
+                )}
               </IconButton>
               <Menu
                 id="menu-appbar"
