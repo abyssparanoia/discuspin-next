@@ -36,8 +36,9 @@ export const createUser = async (userID: string, displayName?: string, avatarURL
     })
 
   await auth.currentUser!.updateProfile({
-    displayName: 'ゲストさん',
+    displayName: displayName || 'ゲストさん',
     photoURL:
+      avatarURL ||
       'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83'
   })
   return data
