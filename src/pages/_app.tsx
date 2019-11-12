@@ -2,7 +2,7 @@ import * as React from 'react'
 import App, { AppInitialProps, AppContext } from 'next/app'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { Layout } from 'src/web/components/Layout'
+import { Global } from 'src/web/components/Global'
 import Head from 'next/head'
 import theme from '../web/thema'
 
@@ -27,9 +27,9 @@ export default class extends App<AppInitialProps> {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Layout userID={pageProps && pageProps.uid}>
+          <Global {...pageProps}>
             <Component {...pageProps} />
-          </Layout>
+          </Global>
         </ThemeProvider>
       </>
     )

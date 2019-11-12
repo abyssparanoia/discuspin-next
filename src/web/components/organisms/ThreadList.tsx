@@ -67,13 +67,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   channelID: string
-  userID: string
+  uid: string
   threadID?: string
 }
 
-export const ThreadList = ({ channelID, threadID, userID }: Props) => {
+export const ThreadList = ({ channelID, threadID, uid }: Props) => {
   const [isDialog, setIsDialog] = useState<boolean>(false)
-  const { handleSubmit } = useCreateThread({ channelID, userID })
+  const { handleSubmit } = useCreateThread({ channelID, userID: uid })
   const { threadList } = useWatchThreadList({ channelID })
   const classes = useStyles()
 

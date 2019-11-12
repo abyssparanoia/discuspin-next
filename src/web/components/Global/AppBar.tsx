@@ -24,11 +24,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface Props {
-  userID?: string
+  uid?: string
   handleSignOut: () => void
 }
 
-export const MenuAppBar = ({ userID, handleSignOut }: Props) => {
+export const MenuAppBar = ({ uid, handleSignOut }: Props) => {
   const classes = useStyles({})
   const [anchorEl, setAnchorEl] = React.useState<EventTarget & HTMLButtonElement | undefined>(undefined)
   const open = Boolean(anchorEl)
@@ -47,7 +47,7 @@ export const MenuAppBar = ({ userID, handleSignOut }: Props) => {
           <Typography variant="h6" className={classes.title}>
             <Link href="/">NextJS Firebase Boilerplate</Link>{' '}
           </Typography>
-          {userID && (
+          {uid && (
             <div>
               <IconButton
                 aria-label="Account of current user"
@@ -82,7 +82,7 @@ export const MenuAppBar = ({ userID, handleSignOut }: Props) => {
               </Menu>
             </div>
           )}
-          {!userID && <Link href="/sign_in">SignIn</Link>}
+          {!uid && <Link href="/sign_in">SignIn</Link>}
         </Toolbar>
       </AppBar>
     </div>

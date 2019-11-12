@@ -4,10 +4,10 @@ import { ThreadList } from '../organisms/ThreadList'
 import { useRouter } from 'next/router'
 
 interface Props {
-  userID: string
+  uid: string
 }
 
-export const SideBar = ({ userID }: Props) => {
+export const SideBar = ({ uid }: Props) => {
   const router = useRouter()
   const channelID = router.query.channelID as string | undefined
   const threadID = router.query.threadID as string | undefined
@@ -15,7 +15,7 @@ export const SideBar = ({ userID }: Props) => {
   return (
     <>
       <ChannelList channelID={channelID} />
-      {channelID && <ThreadList channelID={channelID} threadID={threadID} userID={userID} />}
+      {channelID && <ThreadList channelID={channelID} threadID={threadID} uid={uid} />}
     </>
   )
 }
