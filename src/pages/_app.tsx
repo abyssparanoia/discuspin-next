@@ -20,8 +20,6 @@ export default class extends App<AppInitialProps> {
   render() {
     const { Component, pageProps } = this.props
 
-    console.log(pageProps)
-
     return (
       <>
         <Head>
