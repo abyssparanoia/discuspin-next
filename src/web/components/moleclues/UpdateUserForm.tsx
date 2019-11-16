@@ -63,14 +63,9 @@ export const UpdateUserForm = ({ onSubmit, onClose, initialValue }: Props) => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Field name="title" type="text" label="title" className={classes.formFields} component={TextField} />
-          <Field
-            name="description"
-            type="text"
-            label="Description"
-            className={classes.formTextArea}
-            component={TextField}
-          />
+          <Field name="displayName" type="text" label="表示名" className={classes.formFields} component={TextField} />
+          <Field name="position" type="text" label="肩書き" className={classes.formFields} component={TextField} />
+          <Field name="description" type="text" label="自己紹介" className={classes.formFields} component={TextField} />
           <Button
             variant="contained"
             color="primary"
