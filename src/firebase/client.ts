@@ -1,6 +1,7 @@
 import * as firebase from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(require('../../firebaseClientKey.json'))
@@ -8,6 +9,7 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth()
 const db = firebase.firestore()
+const storage = firebase.storage()
 
 class FirebaseAuthenticationError extends Error {
   constructor(error: firebase.auth.Error) {
@@ -36,4 +38,4 @@ class FirebaseAuthenticationError extends Error {
   }
 }
 
-export { firebase, auth, db, FirebaseAuthenticationError }
+export { firebase, auth, db, storage, FirebaseAuthenticationError }
