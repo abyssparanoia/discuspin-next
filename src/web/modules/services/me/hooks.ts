@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { fetchUserOrFail } from 'src/web/modules/repositories'
+import * as repositories from 'src/web/modules/repositories'
 import { User } from 'src/web/modules/entities'
 import { useEffectAsync } from '../util'
+import { IUpdateUserForm } from './interface'
+import undefined from 'firebase/empty-import'
 
 export const useUpdateUser = ({ uid }: { uid: string }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
@@ -11,7 +13,8 @@ export const useUpdateUser = ({ uid }: { uid: string }) => {
   useEffectAsync(() => {
     setIsLoading(true)
     setError(undefined)
-    fetchUserOrFail(uid)
+    repositories
+      .fetchUserOrFail(uid)
       .then(user => {
         setIsLoading(false)
         setInitialValue(user)
@@ -22,5 +25,19 @@ export const useUpdateUser = ({ uid }: { uid: string }) => {
       })
   })
 
-  return { initialValue, isLoading, error }
+  const handleSubmit = (values: IUpdateUserForm) => {
+    setIsLoading(true)
+    setError(undefined)
+    repositories
+      .updateUser(uid, values.description, values.position, values.description, undefined)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setIsLoading(false)
+        setError(err)
+      })
+  }
+
+  return { initialValue, isLoading, error, handleSubmit }
 }
