@@ -11,6 +11,12 @@ export const fetchMe = async (): Promise<User | undefined> => {
   return buildUser(doc.id, doc.data()!)
 }
 
+export const fetchUser = async (userID: string): Promise<User | undefined> => {
+  const doc = await buildUserReference({ db, userID }).get()
+  if (!doc.exists) return undefined
+  return buildUser(doc.id, doc.data()!)
+}
+
 export const fetchUserOrFail = async (userID: string): Promise<User> => {
   const doc = await buildUserReference({ db, userID }).get()
   if (!doc.exists) throw new Error('ユーザーが見つかりませんでした')
