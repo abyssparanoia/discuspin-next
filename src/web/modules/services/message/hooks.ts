@@ -6,7 +6,7 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { useEffectAsync } from '../util'
 import { Message } from 'src/web/modules/entities'
 
-export const useWatchMessageList = async ({ threadID }: { threadID: string }) => {
+export const useWatchMessageList = ({ threadID }: { threadID: string }) => {
   const [messageList, setMessageList] = useState<Message[]>([])
   const [value, loading, error] = useCollection(
     entities.buildMessageCollectionPath({ db, threadID }).orderBy('updatedAt', 'desc'),
