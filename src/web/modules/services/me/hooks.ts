@@ -34,9 +34,9 @@ export const useUpdateUser = ({ uid }: { uid: string }) => {
     setIsLoading(true)
     setError(undefined)
     repositories
-      .updateUser(uid, displayName, position, description, avatarURL)
+      .updateMe(displayName, position, description, avatarURL)
       .then(() => {
-        setInitialValue({ displayName, position, description })
+        setInitialValue({ displayName, position, description, avatarURL })
         setIsLoading(false)
       })
       .catch(err => {

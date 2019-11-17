@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 interface Props extends Partial<Credential> {}
 
-export const MenuAppBar = ({ uid, avatarURL }: Props) => {
+export const MenuAppBar = ({ uid }: Props) => {
   const classes = useStyles({})
 
   return (
@@ -36,7 +36,7 @@ export const MenuAppBar = ({ uid, avatarURL }: Props) => {
           <Typography variant="h6" className={classes.title}>
             <Link href="/">Discuspin</Link>{' '}
           </Typography>
-          {uid && <UserIcon uid={uid} avatarURL={avatarURL} />}
+          {uid && <UserIcon uid={uid} />}
           {!uid && <Link href="/sign_in">SignIn</Link>}
         </Toolbar>
       </AppBar>

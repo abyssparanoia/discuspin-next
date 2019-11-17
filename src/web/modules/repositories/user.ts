@@ -1,6 +1,7 @@
 import { db, auth } from 'src/firebase/client'
 import { User, buildUser, buildUserReference } from 'src/web/modules/entities'
 import moment from 'moment'
+import { createSession } from './auth'
 
 export const fetchMe = async (): Promise<User | undefined> => {
   if (!auth.currentUser) return undefined
@@ -41,16 +42,19 @@ export const createUser = async (userID: string, displayName?: string, avatarURL
       avatarURL ||
       'https://firebasestorage.googleapis.com/v0/b/discuspin.appspot.com/o/images%2Fdefaulticon.png?alt=media&token=d8fd8be0-e11a-441d-9b0b-a806cd563a83'
   })
+
   return data
 }
 
-export const updateUser = async (
-  userID: string,
+export const updateMe = async (
   displayName?: string,
   position?: string,
   description?: string,
   avatarURL?: string
 ): Promise<User> => {
+  if (!auth.currentUser) throw new Error('未認証です')
+  const userID = auth.currentUser.uid
+
   const user = await fetchUserOrFail(userID)
 
   const timestamp = +moment().format('X')
@@ -73,6 +77,8 @@ export const updateUser = async (
     displayName: displayName || user.displayName,
     photoURL: avatarURL || user.avatarURL
   })
+
+  await createSession(auth.currentUser)
 
   return { ...user, ...data }
 }
