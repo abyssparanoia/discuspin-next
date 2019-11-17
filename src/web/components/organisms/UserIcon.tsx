@@ -54,8 +54,6 @@ export const UserIcon = ({ uid }: Props) => {
     }
   }
 
-  console.log(initialValue.avatarURL)
-
   return (
     <div>
       <IconButton
