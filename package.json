@@ -87,7 +87,7 @@
     "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.6.0",
     "supertest": "^4.0.2",
-    "ts-node": "8.5.2",
+    "ts-node": "8.5.3",
     "tsconfig-paths": "3.8.0",
     "typescript": "3.7.2",
     "wait-on": "^3.2.0"
